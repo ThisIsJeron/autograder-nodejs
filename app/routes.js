@@ -26,6 +26,21 @@ module.exports = function(app, passport) {
     }));
 
     // =====================================
+    // ADMINLOGIN ===============================
+    // =====================================
+    // show the adminlogin form
+    app.get('/adminlogin', function(req,res){
+      res.render('adminlogin.ejs', { message: req.flash('loginMessage')});
+    });
+
+    app.post('/adminlogin', passport.authenticate('local-login',{
+        successRedirect : '/admindashboard',
+        failureRedirect : 'adminlogin',
+        failureFlash : true
+    }))
+
+    /*
+    // =====================================
     // SIGNUP ==============================
     // =====================================
     // show the signup form
@@ -41,7 +56,8 @@ module.exports = function(app, passport) {
         failureRedirect : '/signup', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
-
+    */
+    
     // =====================================
     // PROFILE SECTION =====================
     // =====================================
